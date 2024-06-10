@@ -1,6 +1,4 @@
-<?php
-$nam=$lnam=$num=$Id="";?>
-
+git
 <html>
     <head>
     <title>
@@ -17,7 +15,20 @@ $nam=$lnam=$num=$Id="";?>
     <table border="2px" style="margin:auto;">
     <form action="formvalidation.php" method="post">
        <tr><td><label>Enter Name:</label></td><td><input type="text" name="name">
-        <?php if($_SERVER["REQUEST_METHOD"] == "POST"){ $checkname=false; $vn=$_POST['name']; if(strlen($vn)<4){?><br><?php echo 'give upto 5 char name';$checkname=true;}} ?></td></tr>
+        <?php 
+        
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+             $checkname=false; 
+             $vn=$_POST['name']; 
+             if(strlen($vn)<4){
+                ?>
+                <br>
+                <?php 
+                echo 'give upto 5 char name';
+                $checkname=true;
+                }} 
+                ?>
+                </td></tr>
         <tr><td><label>Enter lastname:</label></td><td><input type="text" name="lname">
         <?php if($_SERVER["REQUEST_METHOD"] == "POST"){ $checklastname=false; $vl=$_POST['lname']; if(strlen($vl)>2){?><br><?php echo 'give below 2 char name';$checklastname=true;}}?></td></tr>
         <tr><td> <label>Enter phoneno:</label></td><td><input type="text" name="phoneno">
@@ -32,27 +43,6 @@ $nam=$lnam=$num=$Id="";?>
 </table>
 </form>
 </table>
-<?php
-if($_SERVER["REQUEST_METHOD"]=="POST"){
-    
-      
-        $nam = test_input($_POST["name"]);
-     
-        $lnam = test_input($_POST["lname"]);
-    
-        $num= test_input($_POST["phoneno"]);
-
-        $Id= test_input($_POST["mailId"]);
-
-        
-
-}
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }?>
 
 <h1><?php 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
