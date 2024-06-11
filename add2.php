@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Student Marks</title>
+  <title>Student Registration Form 1</title>
   <style>
     form {
       margin: auto;
@@ -110,32 +110,16 @@
 
 <body>
   <form>
-    <h2>Student Registration Form</h2>
+    <h2>Student Attendance Form</h2>
 
     <label for="first-name">Name:</label>
     <input type="text" id="first-name" name="first-name" required>
 
-    <label for="exam">Exam:</label>
-    <input type="text" name="exam" required>
-
-    <label for="tamil">Tamil</label>
+    <label for="exam">Date</label>
+    <input type="date" name="exam" required>
+    <br><br>
+    <label for="tamil">Present or Absent</label>
     <input type="text" required>
-
-    <label for="english">English</label>
-    <input type="text" required>
-
-    <label for="maths">Maths</label>
-    <input type="text" required>
-
-    <label for="science">Science</label>
-    <input type="text" required>
-
-    <label for="social">Social</label>
-    <input type="text" required>
-
-    <label for="outoff">OutOff</label>
-    <input type="text" required>
-
 
     <div class="buttons">
       <button type="reset">Reset</button>
@@ -143,5 +127,6 @@
     </div>
   </form>
 </body>
+
 
 </html>

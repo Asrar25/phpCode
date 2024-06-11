@@ -1,3 +1,8 @@
+<?php 
+session_start();
+$name=$_SESSION['name'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,15 +83,15 @@ iframe{
 <body>
 
 <header>
-  <h2>Student Info</h2>
+  <h2>Welcome <?php echo $name; ?></h2>
 </header>
 
 <section>
   <nav>
     <ul>
-      <li><a href="marks.php" target="place">Marks</a></li>
-      <li><a href="attendance.php" target="place">Attendance</a></li>
-      <li><a href="add.php" target="place">Add Student</a></li>
+      <li><a href="marks.php?name='<?=$_SESSION['name']?>"<?=$_SESSION['name']?> target="place">Marks</a></li>
+      <li><a href="attendance.php?name='<?=$_SESSION['name']?>"<?=$_SESSION['name']?> target="place">Attendance</a></li>
+      <li><a href="addstudent.php?name='<?=$_SESSION['name']?>"<?=$_SESSION['name']?> target="place">Add Student</a></li>
     </ul>
   </nav>
   
