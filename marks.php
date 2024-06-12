@@ -149,6 +149,7 @@ td, th {
         <thead>
           <tr>
             <th>SI</th>
+            <th>Name</th>
             <th>Exams</th>
             <th>English</th>
             <th>Maths</th>
@@ -190,7 +191,7 @@ td, th {
                         <td><?php echo $m3;?></td>
                         <td><?php echo $m4;?></td>
                         <td><?php echo $t;if($max<=$t){$max=$t;}?></td>
-                        <td><a href="update.php?name=<?php echo $staff_givennam?>">Update</a></td>
+                        <td><a href="update.php?name=<?php echo $staff_givennam?>">Update</a></td>-----------
                     </tr>
                     
                     <?php $id++; }}
