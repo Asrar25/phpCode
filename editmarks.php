@@ -41,9 +41,7 @@
             }
  
             input[type="text"],
-            input[type="email"],
-            input[type="password"],
-            select {
+            input[type="number"] {
                 width: 100%;
                 margin-bottom: 15px;
                 padding: 10px;
