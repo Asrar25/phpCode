@@ -80,6 +80,7 @@ iframe{
 }
 </style>
 </head>
+
 <body>
 
 <header>
@@ -89,9 +90,9 @@ iframe{
 <section>
   <nav>
     <ul>
-      <li><a href="marks.php?name='<?=$_SESSION['name']?>"<?=$_SESSION['name']?> target="place">Marks</a></li>
-      <li><a href="attendance.php?name='<?=$_SESSION['name']?>"<?=$_SESSION['name']?> target="place">Attendance</a></li>
-      <li><a href="addstudent.php?name='<?=$_SESSION['name']?>"<?=$_SESSION['name']?> target="place">Add Student</a></li>
+      <li><a href="marks.php?name=<?=$_SESSION['name']?>"<?=$_SESSION['name']?> target="place">Marks</a></li>
+      <li><a href="attendance.php?name=<?=$_SESSION['name']?>"<?=$_SESSION['name']?> target="place">Attendance</a></li>
+      <li><a href="addstudent.php?name=<?=$_SESSION['name']?>"<?=$_SESSION['name']?> target="place">Add Student</a></li>
     </ul>
   </nav>
   
