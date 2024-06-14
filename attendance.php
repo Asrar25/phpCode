@@ -1,4 +1,6 @@
-<?php $name='Ajay' ?>
+<?php
+session_start();
+ $name= $_SESSION['name']; ?>
 <?php 
 
 $host="localhost";
@@ -24,7 +26,7 @@ $port =3001;
   </head>
   <style>
     body{
-  background-color: #c5cae9;
+  background-color: white;
   padding: 25px;
 }
 
@@ -36,7 +38,6 @@ $port =3001;
   padding-right: 32px;
   padding-top: 40px;
   border-radius: 12px;
-  background-color: #90a4ae;
   font-family: Lato;
 }
 
@@ -61,71 +62,56 @@ td, th {
   <body>
     <div class="container">
       <h2><?php echo $name.' '.'Attendance';?></h2>
-      <table>
-        <thead>
-          <tr>
-            <th>SI</th>
-            <th>Month</th>
-            <th>Present</th>
-            <th>Leave</th>
-            <th>Leave Per/th>
-            <th>Present per</th>
-          <tr>  
-        </thead>
-        <tbody>
-          <tr>
-            <td>01</td>
-            <td>Ali</td>
-            <td>86</td>
-            <td>77</td>
-            <td>87</td>
-            <td>92</td>
-           
-          </tr>
-          <tr>
-            <td>02</td>
-            <td>Salman</td>
-            <td>86</td>
-            <td>77</td>
-            <td>87</td>
-            <td>92</td>
-           
-          </tr>
-          <tr>
-            <td>03</td>
-            <td>Shan</td>
-            <td>86</td>
-            <td>77</td>
-            <td>87</td>
-            <td>92</td>
+      <?php 
+            $host="localhost";
+            $un="root";
+            $password="";
+            $db="student_info";
+            $port =3001;
+            $db_role="";
             
-          </tr>
-          <tr>
-            <td>04</td>
-            <td>Aliyan</td>
-            <td>86</td>
-            <td>77</td>
-            <td>87</td>
-            <td>92</td>
            
-          </tr>
-          <tr>
-            <td>05</td>
-            <td>Zeeshan</td>
-            <td>86</td>
-            <td>77</td>
-            <td>87</td>
-            <td>92</td>
-           
-          </tr>
-        </tbody>
+     ?>
+     <table border="0">
+      <thead>
+      <tr>
+        <th>SI</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Present</th>
+        <th>Absent</th>
+        <th>Total School Day</th>
+</tr>  
+    </thead>
+    <tbody><?php
+     $con =mysqli_connect($host,$un,$password,$db,$port);
+            
+     $sql ="SELECT * FROM student_attendance WHERE student_name='$name'";
+         
+$result =mysqli_query($con,$sql);
+
+$id=1;
+  while($each_row = mysqli_fetch_array($result)){
+         $from=$each_row['start'];
+         $to=$each_row['end'];
+         $present=$each_row['present'];
+         $absent=$each_row['absent']; 
+         $total=$present+$absent;
+         ?> 
+         <tr>
+        <td><?php echo $id;?></td>
+        <td><?php echo $from;?></td>
+        <td><?php echo $to;?></td>
+        <td><?php echo $present;?></td>
+        <td><?php echo $absent;?></td>
+        <td><?php echo $total;?></td>
+  </tr>  
+    </tbody>
+    <?php
+         $id++;  
+  }
+      ?>
       
-        <!-- <tfoot>
-          <tr>
-            <td colspan=3>Maximum Marks: </td>
-            <td colspan=3>Marks Obtained: </td>
-            <td colspan=2>Grade: </td>
-          </tr> -->
     
       </table>
     </div>

@@ -109,39 +109,66 @@
 </head>
 
 <body>
-  <form>
+  <form action="#" method="post">
     <h2>Student Registration Form</h2>
 
     <label for="first-name">Name:</label>
-    <input type="text" id="first-name" name="first-name" required>
+    <input type="text" id="first-name" name="name" required>
 
-    <label for="exam">Exam:</label>
-    <input type="text" name="exam" required>
+    <label for="first-name">UserName:</label>
+    <input type="text" id="first-name" name="un" required>
 
-    <label for="tamil">Tamil</label>
-    <input type="text" required>
+    <label for="first-name">Password :</label>
+    <input type="password" id="first-name" name="password" required>
 
-    <label for="english">English</label>
-    <input type="text" required>
+    <label for="first-name">Comform-Password :</label>
+    <input type="password" id="first-name" name="cpassword" required>
 
-    <label for="maths">Maths</label>
-    <input type="text" required>
-
-    <label for="science">Science</label>
-    <input type="text" required>
-
-    <label for="social">Social</label>
-    <input type="text" required>
-
-    <label for="outoff">OutOff</label>
-    <input type="text" required>
-
+    <label for="exam">Class :</label>
+    <input type="text" name="class" required>
 
     <div class="buttons">
-      <button type="reset">Reset</button>
-      <button type="submit">Submit</button>
+      <button type="submit">ADD</button>
     </div>
   </form>
+  <?php 
+  if($_SERVER['REQUEST_METHOD']=='POST'){
+    $host="localhost";
+    $un="root";
+    $password="";
+    $db="student_info";
+    $port =3001;
+    $db_role="";
+    $stdname=$_POST['name'];
+    $class=$_POST['class'];
+    $uname=$_POST['un'];
+    $stdpassword=$_POST['password'];
+    $cpassword=$_POST['cpassword'];
+  
+
+    $con =mysqli_connect($host,$un,$password,$db,$port);
+    if($stdpassword ==$cpassword){
+    $sql ="INSERT INTO students_marks (student_name, class) VALUES ('$stdname', $class)";
+
+;   $sql2="INSERT INTO login(name,username,password,role)VALUES('$stdname','$uname','$stdpassword','Student')";
+            if($con->query($sql2)==TRUE){       
+    if ($con->query($sql) === TRUE) {
+      echo "Added Successfully";
+    } else {
+      echo "Error: " . $sql . "<br>" . $con->error;
+    }
+  }else{
+    echo "Error: " . $sql2 . "<br>" . $con->error;
+  }
+  }else{
+    echo 'Password doesnot match';
+  }
+
+
+  }
+    ?>
+
 </body>
 
 </html>
+

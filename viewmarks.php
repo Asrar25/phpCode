@@ -15,12 +15,12 @@
   </head>
   <style>
     body{
-  background-color: #c5cae9;
+      background-color: white;
   padding: 25px;
 }
 .editbox{
   width:70px;
-  background-color:#90a4ae;
+
   color:black;
   border:none;
 }
@@ -33,7 +33,7 @@
   padding-right: 32px;
   padding-top: 40px;
   border-radius: 12px;
-  background-color: #90a4ae;
+
   font-family: Lato;
 }
 
@@ -49,10 +49,14 @@ td, th {
   padding: 12px;
   border: 2px dotted;
 }
+input[type=text] {
+  border: none;
+  border-bottom: 2px solid red;
+}
     </style>
   <body>
     <form method="post">
-        <input type="text" name="student_name">
+       Enter a Student Name : <input type="text" name="student_name">
         <input type="submit" value="view">
     </form>
   <?php 
@@ -66,10 +70,6 @@ $port =3001;
 $db_role="";
 
 $con =mysqli_connect($host,$un,$password,$db,$port);
-if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error);
-  }else{
-  echo "Connected successfully";}
   $sql ="SELECT * FROM login WHERE name='$name'";
                 
   $result =mysqli_query($con,$sql);
@@ -112,8 +112,6 @@ if ($con->connect_error) {
                         $m3=$each_row["science"];
                         $m4=$each_row["social"];
                         $t=$m1+$m2+$m3+$m4;
-
-                    
                     ?>
 
 

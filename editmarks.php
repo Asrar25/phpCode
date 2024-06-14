@@ -8,161 +8,159 @@
         />
         <title>Registration Form</title>
         <style>
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f3f3f3;
-                margin: 0;
-                padding: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-            }
- 
-            .main {
-                background-color: #fff;
-                border-radius: 15px;
-                box-shadow: 0 0 20px
-                    rgba(0, 0, 0, 0.2);
-                padding: 20px;
-                width: 300px;
-            }
- 
-            .main h2 {
-                color: #4caf50;
-                margin-bottom: 20px;
-            }
- 
-            label {
-                display: block;
-                margin-bottom: 5px;
-                color: #555;
-                font-weight: bold;
-            }
- 
-            input[type="text"],
-            input[type="number"] {
-                width: 100%;
-                margin-bottom: 15px;
-                padding: 10px;
-                box-sizing: border-box;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-            }
- 
-            button[type="submit"] {
-                padding: 15px;
-                border-radius: 10px;
-                border: none;
-                background-color: #4caf50;
-                color: white;
-                cursor: pointer;
-                width: 100%;
-                font-size: 16px;
-            }
-        </style>
+    body{
+        background-color: white;
+  padding: 25px;
+}
+.editbox{
+  width:70px;
+
+  color:black;
+  border:none;
+}
+
+.container{
+  width: 720px;
+  height: 440px;
+  margin: 0 auto;
+  padding-left: 32px;
+  padding-right: 32px;
+  padding-top: 40px;
+  border-radius: 12px;
+
+  font-family: Lato;
+}
+
+.container h2{
+  text-align: center;
+}
+
+table{
+  margin: 0 auto;
+}
+
+td, th {
+  padding: 12px;
+  border: 2px dotted;
+}
+.boxs{
+    height:20px;
+    width:40px;
+    border:none;
+}
+
+    </style>
     </head>
  
     <body>
-<?php
+        <form method="get" >
+       Enter Name : <input type="text" name="student_name" style="border: none;border-bottom: 2px solid red;">Enter Exam : <input type="text" name="examname" style="border: none;border-bottom: 2px solid red;">
+       
+        <input type="submit" name="view" value="view">
+    </form>
+  <?php 
+  
 $host="localhost";
 $un="root";
 $password="";
 $db="student_info";
 $port =3001;
 $db_role="";
+
 $con =mysqli_connect($host,$un,$password,$db,$port);
-if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error);
-  }else{
-  echo "Connected successfully";}
+  
 ?>
-        <div class="main">
-            <h2>Student Marks Editing</h2>
-            <form action="#" method="post"></form>
-                <label for="first">Student Name :</label>
-                <input
-                    type="text"
-                    id="first"
-                    name="name"
-                    required
-                />
- 
-                <label for="last">Exam Name :</label>
-                <input
-                    type="text"
-                    id="last"
-                    name="exam"
-                    required
-                />
-
-                <label>Tamil :</label>
-                <input
-                    type="number"
-                    id="email"
-                    name="tamil"
-                    required
-                />
- 
-                <label>English :</label>
-                <input
-                    type="number"
-                    id="email"
-                    name="english"
-                    required
-                />
-
-                
-                <label>Maths :</label>
-                <input
-                    type="number"
-                    id="email"
-                    name="maths"
-                    required
-                />
-
-                
-                <label>Science :</label>
-                <input
-                    type="number"
-                    id="email"
-                    name="science"
-                    required
-                />
-
-                
-                <label>Social :</label>
-                <input
-                    type="number"
-                    id="email"
-                    name="social"
-                    required
-                />
-
-                <button type="submit" name="addsave">
-                    Save
-                </button>
-            </form>
-            <?php 
-if(isset($_POST['addsave'])){
-$studentname=$_POST['name'];
-$examname=$_POST['exam'];
-$tam=$_post['tamil'];
-$eng=$_POST['english'];
-$mat= $_POST['mat'];
-$sci=$_POST['sci'];
-$soc=$_POST['soc'];
-
-$sql ="UPDATE student_marks SET student_name=$studentname,class=$class,exam_name=$examname,tamil=$tam,english=$eng,maths=$mat,science=$sci,social=$soc,outoff=500 where student_name=$studentname AND exam_name=$examname";
-                
-  if($con->query($sql) === TRUE) {
-  echo "Record updated successfully";
-} else {
-  echo "Error updating record: " . $conn->error;
+    <div class="container">
+    <?php  
+            if(isset($_GET['view'])){
+                $name =$_GET['student_name'];
+               $exam=$_GET['examname'];
+                $sql ="SELECT * FROM students_marks WHERE student_name='$name' AND exam_name='$exam'";
+                $result =mysqli_query($con,$sql);
+                    $id=1;
+                    $max=0;
+               if(mysqli_num_rows($result) > 0){
+                while($each_row = mysqli_fetch_array($result)){
+                      $tname=$each_row["student_name"];
+                      $tclass=$each_row["class"];
+                      $texam=$each_row["exam_name"];
+                      $m1=$each_row["tamil"];
+                        $m2=$each_row["english"];
+                        $m3=$each_row["maths"];
+                        $m4=$each_row["science"];
+                        $m5=$each_row["social"];
+                        $t=$m1+$m2+$m3+$m4+$m5;
+                    ?>
+      <table>
+        <form action="#" method="post">
+        <thead>
+          <tr>
+            <th>SI</th>
+            <th>Name</th>
+            <th>Class</th>
+            <th>Exams</th>
+            <th>Tamil</th>
+            <th>English</th>
+            <th>Maths</th>
+            <th>Science</th>
+            <th>Social</th>
+            <th>Total</th>
+          <tr>  
+        </thead>
+        <tbody>
+            
+                    <tr>
+                        <td><input type="number" value="<?php echo $id;?>" class ="boxs"></td>
+                        <td><input class ="boxs"type="text" name="name" value="<?php echo $tname;?>"></td>
+                        <td><input class ="boxs"type="number" name="class"value="<?php echo $tclass;?>"></td>
+                        <td><input class ="boxs"type="text" name="exam"value="<?php echo $texam;?>"></td>
+                        
+                        <td><input class ="boxs"type="number" name="tamil"value="<?php echo $m1;?>"></td>
+                        <td><input class ="boxs"type="number" name="english"value="<?php echo $m2;?>"></td>
+                        <td><input class ="boxs"type="number" name="maths"value="<?php echo $m3;?>"></td>
+                        <td><input class ="boxs"type="number" name="science"value="<?php echo $m4;?>"></td>
+                        <td><input class ="boxs"type="number" name="social"value="<?php echo $m5;?>"></td>
+                        <td><input class ="boxs"type="number" value="<?php echo $t;?>"></td>
+                    </tr>
+                    
+                    <?php $id++; }    ?>
+        </tbody>
+         
+        <tfoot>
+          <tr>
+            <td colspan=10 style="text-align:center;"><input type="submit" value="save changes"></td>
+          </tr>
+        </tfoot> 
+        <?php }else {
+    echo "<tr><td colspan='10'>Record Not Found</td></tr>";
 }
-}
-?>
-        </div>
-       
-    </body>
+                ?>
+        </form>
+        </table>
+        <?php
+        
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            $uname=$_POST['name'];
+            $uclass=$_POST['class'];;
+            $uexam=$_POST['exam'];;
+            $utamil=$_POST['tamil'];
+            $uenglish=$_POST['english'];
+            $umaths=$_POST['maths'];
+            $uscience=$_POST['science'];
+            $usocial=$_POST['social'];
+
+            $sql2 ="UPDATE students_marks SET student_name='$uname',class='$uclass',exam_name='$uexam',tamil='$utamil',english='$uenglish',maths='$umaths',science='$uscience',social='$usocial' WHERE student_name='$uname' AND exam_name='$uexam'";
+
+  if ($con->query($sql2) === TRUE) {
+    echo "Record updated successfully";
+  } else {
+    echo "Error updating record: " . $con->error;
+  }
+        }
+    }
+        ?>
+        
+      
+    </div>
+  </body>
 </html>

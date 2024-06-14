@@ -3,27 +3,109 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-</style>
+        /*style.css*/
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+    background: #f3f3f3;
+    flex-direction: column;
+    margin: 0;
+}
+
+.main {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    transition: transform 0.2s;
+    width: 500px;
+    text-align: center;
+}
+
+h1 {
+    color: #4CAF50;
+}
+
+label {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-align: left;
+    color: #555;
+    font-weight: bold;
+}
+
+
+input {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background-color: #4CAF50;
+    width: 100%;
+    font-size: 16px;
+}
+
+.wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+      </style>
 </head>
 <body>
+<div class="main">
+            <h1>Login Form</h1>
+            <h3>Enter your login credentials</h3>
+            <form action="login.php" method="post">
+                  <label for="first">
+                        Username:
+                  </label>
+                  <input type="text" 
+                         id="first" 
+                         name="uname"
+                         placeholder="Enter your Username" required>
 
-<h2>Login Form</h2>
+                  <label for="password">
+                        Password:
+                  </label>
+                  <input type="password"
+                         id="password" 
+                         name="psw" 
+                         placeholder="Enter your Password" required>
 
-
-<form action="login.php" method="post">
-
-  <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" >
-        
-    <button type="submit" value="login">Login</button>
-    <br>
-    <a href="register.php">Create Account</a>
-  </div>
-</form>
+                  <div class="wrap">
+                        <button type="submit"
+                                onclick="solve()" value="login">
+                              Submit
+                        </button>
+                  </div>
+            </form>
+            <p>Not registered?
+            <a style="text-decoration: none;" href="register.php">
+                        Create an account
+                  </a>
+            </p>
+      </div>
 <?php 
  if($_SERVER["REQUEST_METHOD"] == "POST"){
  $username=$_POST['uname'];
@@ -35,11 +117,6 @@
  $port=3001;
  $db="student_info";
  $con =mysqli_connect($host,$un,$password,$db,$port);
- 
- if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error);
-  }else{
-  echo "Connected successfully";}
 
   $sql ="SELECT * FROM login WHERE username='$username'";
  $result =mysqli_query($con,$sql);
@@ -48,17 +125,21 @@
     $db_password=$each_row["password"];
     $db_nam=$each_row["name"];
 }
+if(mysqli_num_rows($result) > 0){
 if($upassword==$db_password){
+  echo '<script>alert("Login Successfull")</script>'; 
     session_start();
-
     $_SESSION['name']=htmlentities($db_nam);
     header('Location: student.php');
 }else{
-    echo 'not equal';
+  echo '<script>alert("Incorrect Password")</script>'; 
+    
 }
- }
-
-                    
-                    ?>
+ } else{
+  echo '<script>alert("Invalid UserName")</script>'; 
+    
+}
+}?>
 </body>
 </html>
+

@@ -11,10 +11,7 @@ $port =3001;
 $db_role="";
 
 $con =mysqli_connect($host,$un,$password,$db,$port);
-if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error);
-  }else{
-  echo "Connected successfully";}
+
   $sql ="SELECT * FROM login WHERE name='$name'";
                 
   $result =mysqli_query($con,$sql);
@@ -41,12 +38,12 @@ if ($con->connect_error) {
   </head>
   <style>
     body{
-  background-color: #c5cae9;
+      background-color: #f1f1f1;
   padding: 25px;
 }
 .editbox{
   width:70px;
-  background-color:#90a4ae;
+
   color:black;
   border:none;
 }
@@ -59,7 +56,7 @@ if ($con->connect_error) {
   padding-right: 32px;
   padding-top: 40px;
   border-radius: 12px;
-  background-color: #90a4ae;
+
   font-family: Lato;
 }
 
@@ -76,16 +73,31 @@ td, th {
   border: 2px dotted;
 }
 iframe{
-  width: 100%;
-  
-  height: 270px; 
+  overflow:hidden;  
+ width: 100%;
+ height: 550px; /* only for demonstration, should be removed */
+ background-color: #f1f1f1;
 }
+a:link, a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: black;
+}
+
     </style>
   <body>
-   <?php   if($db_role=="student"):
+   <?php if($db_role=="student"):
     ?>
     <!-- Student  Access -->
-     <h1>student Access</h1>
+    <h3 style=" display:inline-block;float: right;">STUDENT : <?php echo $name;?></h3>
+    <div>
     <div class="container">
       <h2><?php echo $name.' '.'Overall Marks';?></h2>
       <table>
@@ -150,10 +162,11 @@ iframe{
 
 
       
-      <h1>staff Access</h1>
-        <a  href="viewmarks.php" target="down">View Marks</a> 
-          <a href="editmarks.php" target="down">Update Marks</a>
-        <iframe name="down" frameBorder="0"></iframe>
+      <h3 style=" display:inline-block;float: right;">STAFF : <?php echo $name;?></h3>
+      <div">
+        <a  href="viewmarks.php" target="down">View Marks</a>   <a href="editmarks.php" target="down">Update Marks</a>
+        </div>
+        <iframe name="down" frameBorder="0" ></iframe>
 
 
 
@@ -162,7 +175,8 @@ iframe{
 
     <?php ;elseif($db_role=="admin"):?>
       <!-- Admin Access -->
-       <h1>admin Access</h1>
+      <h3 style=" display:inline-block;float: right;">ADMIN : <?php echo $name;?></h3>
+      <div>
        <div class="container">
       
       <table>
